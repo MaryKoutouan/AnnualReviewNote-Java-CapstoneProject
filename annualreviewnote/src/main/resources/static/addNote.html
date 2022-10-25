@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./CSS/index.css" />
+    <link rel="stylesheet" href="./CSS/home.css">
+    <title>Add Annual Notes</title>
+</head>
+<body>
+
+<div class="container add-note"></div>
+    <h1>Add your Annual Note</h1>
+    <form id="form add-note" ></form>
+
+<button class="add" id="add">
+    <i class="fas fa-plus"></i> Add note</button>
+
+<div class="wrapper" onclick="showDiv()">
+    <li class="add-box">
+        <div class="icon"><i class="uil uil-plus"></i></div>
+        <p>Add new note</p>
+    </li>
+</div>
+<div id="form-addnote" style="display:none;">
+    <form id="register-form">
+        <div class="form-group">
+            <label for="register-companyName">Company name</label>
+            <input type="text" class="form-control" id="register-companyName" placeholder="Enter the Company Name">
+        </div>
+        <div class="form-group">
+            <label for="register-companyTitle">Title</label>
+            <input type="text" class="form-control" id="register-companyTitle" placeholder="Enter your Title in the company">
+        </div>
+        <div class="form-group">
+            <label for="register-note">Note</label>
+            <input type="password" class="form-control" id="register-note" placeholder="Enter your Note">
+        </div>
+        <div class="form-group">
+            <label for="register-github">GitHub Link</label>
+            <input type="password" class="form-control" id="register-github" placeholder="Enter your GitHub Link">
+        </div>
+        <div class="form-group">
+            <label for="register-jiraTicket">Jira Ticket</label>
+            <input type="password" class="form-control" id="register-jiraTicket" placeholder="Enter your JiraTicket">
+        </div>
+        <div class="mt-1">
+            <button id="submit-button" type="submit" class="btn btn-primary">Submit</button>
+            <a href="./login.html" class="btn btn-secondary">Login</a>
+        </div>
+    </form>
+</div>
+
+</body>
+
+<script src="./javascript/addNote.js" type="application/javascript"></script>
+<a href="./home.html"><< Back </a>
+</html>
