@@ -16,8 +16,6 @@ public class ProfessionalInformationDto implements Serializable {
     private String companyInfo;
     private String companyTitle;
 
-    private UsersDto usersDto;
-
     public ProfessionalInformationDto(ProfessionalInformation professionalInformation) {
 
         if (professionalInformation.getId() != null) {

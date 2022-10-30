@@ -12,7 +12,7 @@ const baseUrl = 'http://localhost:8080/api/users'
 
 
 const handleSubmit = async (e) =>{
-console.log("insideeeeee")
+
     e.preventDefault()
 
     let bodyObj = {
@@ -34,7 +34,7 @@ console.log("insideeeeee")
         window.location.replace(responseArr[0])
     }
 }
-console.log(registerForm)
+
 registerForm.addEventListener("submit", handleSubmit)
 
 

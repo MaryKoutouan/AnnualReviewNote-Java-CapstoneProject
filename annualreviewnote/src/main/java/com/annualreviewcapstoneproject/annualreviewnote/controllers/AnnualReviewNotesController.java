@@ -5,6 +5,7 @@ import com.annualreviewcapstoneproject.annualreviewnote.services.AnnualReviewNot
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -18,9 +19,14 @@ public class AnnualReviewNotesController {
         return annualReviewNotesService.getAllAnnualReviewNotes(usersId);
     }
 
-    @PostMapping("/users/{usersId}")
-    public void addNote(@RequestBody AnnualReviewNotesDto annualReviewNotesDto, @PathVariable Long usersId) {
-        annualReviewNotesService.addNote(annualReviewNotesDto, usersId);
+    @GetMapping("/{annualreviewnotesId}")
+    public Optional<AnnualReviewNotesDto> getAnnualReviewNotesById(@PathVariable Long annualreviewnotesId){
+        return annualReviewNotesService.getAnnualReviewNotesById(annualreviewnotesId);
+    }
+
+    @PostMapping("/users/{usersId}/{professionalInfoId}")
+    public void addNote(@RequestBody AnnualReviewNotesDto annualReviewNotesDto, @PathVariable Long usersId, @PathVariable Long professionalInfoId) {
+        annualReviewNotesService.addNote(annualReviewNotesDto, usersId, professionalInfoId);
     }
 
     @DeleteMapping("/{annualreviewnotesId}")

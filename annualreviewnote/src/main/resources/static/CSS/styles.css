@@ -1,0 +1,63 @@
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 100px
+}
+
+
+#addboot {
+    text-align: left
+}
+
+.container {
+}
+.boot-card {
+    border: 1px solid gray;
+  border-radius: 5px;
+  margin-bottom: 25px;
+  padding: 5px 
+}
+.review-card {
+  border-bottom: 1px solid gray;
+  margin-bottom: 25px;
+  padding: 5px 
+}
+.row {
+    width: 100%;
+    background: #EBFAFF; 
+}
+label {
+    cursor: default;
+}
+
+.radio {
+    display: flex;
+    align-content: stretch;
+    justify-content: center;
+    align-items: flex-start;
+}
+aside {
+    margin: 15px;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+button,input,select,textarea {
+    padding:8px;border:none;border:1px solid rgb(148, 140, 140);
+}
+h2, h3 {
+    color: rgb(163, 67, 4);
+}
+#review-guide {
+    background: #eee;
+    padding: 10px 4px;
+}
+.reviewbox {
+    padding-left: 25px;
+}

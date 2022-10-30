@@ -34,6 +34,7 @@ public class AnnualReviewNotes {
     @JsonBackReference
     //@JsonBackReference is the back part of reference – it will be omitted from serialization
     private ProfessionalInformation professionalInformation;
+
     @ManyToOne
     @JsonBackReference
     private Users user;

@@ -21,7 +21,6 @@ public class AnnualReviewNotesDto implements Serializable {
     private Calendar dateNote;
 
     private UsersDto usersDto;
-
     private ProfessionalInformationDto professionalInformationDto;
 
     public AnnualReviewNotesDto(AnnualReviewNotes annualReviewNotes) {

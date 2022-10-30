@@ -47,6 +47,7 @@ public class UsersServiceImpl implements UsersService {
         if (usersOptional.isPresent()) {
             if (passwordEncoder.matches(usersDto.getPassword(), usersOptional.get().getPassword())) {
                 response.add("http://localhost:8080/addNote.html");
+                response.add(String.valueOf(usersOptional.get().getId()));
             } else {
                 response.add("Username or Password incorrect");
             }

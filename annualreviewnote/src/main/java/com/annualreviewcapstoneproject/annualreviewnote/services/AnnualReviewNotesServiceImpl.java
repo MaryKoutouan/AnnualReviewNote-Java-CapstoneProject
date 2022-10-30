@@ -15,6 +15,7 @@ package com.annualreviewcapstoneproject.annualreviewnote.services;
 
 import com.annualreviewcapstoneproject.annualreviewnote.dtos.AnnualReviewNotesDto;
 import com.annualreviewcapstoneproject.annualreviewnote.entities.AnnualReviewNotes;
+import com.annualreviewcapstoneproject.annualreviewnote.entities.ProfessionalInformation;
 import com.annualreviewcapstoneproject.annualreviewnote.entities.Users;
 import com.annualreviewcapstoneproject.annualreviewnote.repositories.AnnualReviewNotesRepository;
 import com.annualreviewcapstoneproject.annualreviewnote.repositories.ProfessionalInformationRepository;
@@ -22,6 +23,8 @@ import com.annualreviewcapstoneproject.annualreviewnote.repositories.UsersReposi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Collections;
 import java.util.List;
@@ -39,10 +42,12 @@ public class AnnualReviewNotesServiceImpl implements AnnualReviewNotesService {
 
     @Override
     @Transactional
-    public void addNote(AnnualReviewNotesDto annualReviewNotesDto, Long usersId) {
+    public void addNote(AnnualReviewNotesDto annualReviewNotesDto, Long usersId, Long professionalInfoId) {
         Optional<Users> usersOptional = usersRepository.findById(usersId);
+        Optional<ProfessionalInformation> optionalProfessionalInformation = professionalInformationRepository.findById(professionalInfoId);
         AnnualReviewNotes annualReviewNotes = new AnnualReviewNotes(annualReviewNotesDto);
         usersOptional.ifPresent(annualReviewNotes::setUser);
+        optionalProfessionalInformation.ifPresent(annualReviewNotes::setProfessionalInformation);
         annualReviewNotesRepository.saveAndFlush(annualReviewNotes);
     }
 
@@ -78,7 +83,13 @@ public class AnnualReviewNotesServiceImpl implements AnnualReviewNotesService {
         }
         return Collections.emptyList();
     }
-
-
+    @Override
+    public Optional<AnnualReviewNotesDto> getAnnualReviewNotesById( Long annualReviewNotesId){
+        Optional<AnnualReviewNotes> annualReviewNotesOptional = annualReviewNotesRepository.findById(annualReviewNotesId);
+        if (annualReviewNotesOptional.isPresent()){
+            return Optional.of(new AnnualReviewNotesDto(annualReviewNotesOptional.get()));
+        }
+        return Optional.empty();
+    }
 
 }

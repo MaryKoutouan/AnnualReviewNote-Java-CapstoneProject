@@ -25,9 +25,9 @@ const handleSubmit = async (e) =>{
         .catch(err => console.error(err.message))
 
     const responseArr = await response.json()
-
-    if (response.status === 200){
+ if (response.status === 200){
         document.cookie = `userId=${responseArr[1]}`
+        document.getElementById('addNoteMenu').style.display = "block";
         window.location.replace(responseArr[0])
     }
 }
