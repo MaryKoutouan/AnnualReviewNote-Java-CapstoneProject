@@ -16,15 +16,18 @@ const submitForm = document.getElementById("form-addCompany")
 const submitFormAddNote = document.getElementById("form-addNote")
 const annualNoteContainer = document.querySelector("#annualNoteContainer")
 
-let annualNoteBody = document.getElementById(`note-body`)
-let updateNoteBtn = document.getElementById("update-note-button")
-
 const btnCompanyNameSubmit = document.querySelector("#companyName")
 const btnPositionTitleSubmit = document.querySelector("#PositionTitle")
 const btnGithubLinkSubmit = document.querySelector("#register-github")
 const btnJiraTicketSubmit = document.querySelector("#register-jiraTicket")
 const btnDateSubmit = document.querySelector("#register-dateNote")
 const btnNoteSubmit = document.querySelector("#register-note")
+
+let updateBtnGithubLinkSubmit = document.getElementById("update-register-github")
+let updateBtnJiraTicketSubmit = document.getElementById("update-register-jiraTicket")
+let updateBtnDateSubmit = document.getElementById("update-register-dateNote")
+let updateAnnualNoteBody = document.getElementById("update-note-body")
+let updateNoteBtn = document.getElementById("update-submit-button")
 
 const headers = {
     'Content-Type':'application/json'
@@ -113,7 +116,9 @@ async function handleDelete(annualreviewnotesId) {
  async function handleNoteEdit(annualreviewnotesId) {
     let bodyObj = {
         id: annualreviewnotesId,
-        body: annualNoteBody.value
+        githubLink: updateBtnGithubLinkSubmit.value,
+        jiraTicket: updateBtnJiraTicketSubmit.value,
+        annualNote: updateAnnualNoteBody.value
         }
         await fetch(baseUrl, {
               method: "PUT",
@@ -126,9 +131,14 @@ async function handleDelete(annualreviewnotesId) {
  }
 
  const populateModal = (obj) => {
-     annualNoteBody.innerText = ''
-     annualNoteBody.innerText = obj.annualNote
-     updateNoteBtn.setAttribute('data-note-id', obj.id)
+    updateBtnGithubLinkSubmit.innerText = ''
+    updateBtnGithubLinkSubmit.innerText = obj.githubLink
+    updateBtnJiraTicketSubmit.innerText = ''
+    updateBtnJiraTicketSubmit.innerText = obj.jiraTicket
+    updateAnnualNoteBody.innerText = ''
+    updateAnnualNoteBody.innerText = obj.annualNote
+    document.getElementById('myModal').style.display = "block";
+    updateNoteBtn.setAttribute('annual-note-id', obj.id)
  }
 
  async function getAnnualNoteById(annualNoteId){
@@ -138,33 +148,56 @@ async function handleDelete(annualreviewnotesId) {
      })
          .then(res => res.json())
          .then(data => populateModal(data))
-         .catch(err => console.error(err.message))
+//         .catch(err => console.error(err.message))
  }
 
  const createNoteCards = (annualNotesList) => {
     annualNoteContainer.innerHTML = ''
     annualNotesList.forEach(obj => {
         let noteCard = document.createElement("div")
+
         noteCard.classList.add("m-2")
         noteCard.innerHTML = `
-            <div class="card d-flex" style="width: 18rem; height: 18rem;">
+            <div class="card d-flex" style="float:left; width:300px; height:300px;">
                 <div class="card-body d-flex flex-column  justify-content-between" style="height: available">
-                    <p class="card-text">jiraTicket ${obj.jiraTicket}</p>
-                    <p class="card-text">githubLink ${obj.githubLink}</p>
-                    <p class="card-text">dateNote ${obj.dateNote}</p>
-                    <p class="card-text">annualNote ${obj.annualNote}</p>
+                    <p class="card-text"><b>Jira Ticket:</b> ${obj.jiraTicket}</p>
+                    <p class="card-text"><a href=${obj.githubLink} target=_blank> <b>GitHub Link</b></a></p>
+                    <p class="card-text"><b>Date:</b> ${(obj.dateNote).split("T")[0]}</p>
+                    <p class="card-text"><b>Note:</b><br> ${(obj.annualNote).split(' ').slice(0, 45).join(' ')} <span id="dots">...</span><span id="more">${(obj.annualNote).split(' ').slice(46, -1).join(' ')}</span></p>
+                    <button onclick="ReadMoreFn()" id="BtnReadMore">Read more</button>
                     <div class="d-flex justify-content-between">
-                        <button class="btn btn-danger" onclick="handleDelete(${obj.id})">Delete</button>
+
+                        <button class="btn btn-danger" onclick="handleDelete(${obj.id})">
+                        Delete
+                        </button>
+
+
                         <button onclick="getAnnualNoteById(${obj.id})" type="button" class="btn btn-primary"
                         data-bs-toggle="modal" data-bs-target="#note-edit-modal">
                         Edit
-                            </button>
+                        </button>
                         </div>
                     </div>
                 </div>
             `
         annualNoteContainer.append(noteCard);
     })
+ }
+
+ function ReadMoreFn() {
+   let dots = document.getElementById("dots");
+   let moreText = document.getElementById("more");
+   let btnText = document.getElementById("BtnReadMore");
+
+   if (dots.style.display === "none") {
+     dots.style.display = "inline";
+     btnText.innerHTML = "Read more";
+     moreText.style.display = "none";
+   } else {
+     dots.style.display = "none";
+     btnText.innerHTML = "Read less";
+     moreText.style.display = "inline";
+   }
  }
 
 function handleLogout(){
@@ -175,9 +208,22 @@ function handleLogout(){
  }
 
 updateNoteBtn.addEventListener("click", (e) => {
-    let noteId = e.target.getAttribute('data-note-id')
-    handleNoteEdit(annualreviewnotesId);
+    let annualNoteId = e.target.getAttribute('annual-note-id')
+     document.getElementById('myModal').style.display = "none";
+    handleNoteEdit(annualNoteId);
 })
+
+// When the user clicks on <span> (x), close the modal
+document.getElementsByClassName("close")[0].onclick = function() {
+  document.getElementById('myModal').style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == document.getElementById("myModal")) {
+    document.getElementById('myModal').style.display = "none";
+  }
+}
 
 const getCompanyInfo = async () => {
     companyName.innerHTML = ''
@@ -193,7 +239,7 @@ const getCompanyInfo = async () => {
           <option value=${elem.id}>${elem.companyInfo}</option>
           `
        let Position = `
-          <option value=${elem.id}>pos</option>
+          <option value=${elem.id}>${elem.companyTitle}</option>
          `
        PositionTitle.innerHTML += Position
        companyName.innerHTML += CompanyName

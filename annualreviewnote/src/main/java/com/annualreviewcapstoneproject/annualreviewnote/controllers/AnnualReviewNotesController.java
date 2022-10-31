@@ -30,8 +30,8 @@ public class AnnualReviewNotesController {
     }
 
     @DeleteMapping("/{annualreviewnotesId}")
-    public void deleteAnnualNoteById(@PathVariable Long annualReviewNotesId) {
-        annualReviewNotesService.deleteNote(annualReviewNotesId);
+    public void deleteAnnualNoteById(@PathVariable Long annualreviewnotesId) {
+        annualReviewNotesService.deleteNote(annualreviewnotesId);
     }
 
     @PutMapping
