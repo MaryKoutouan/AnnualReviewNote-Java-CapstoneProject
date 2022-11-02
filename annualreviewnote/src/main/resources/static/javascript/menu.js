@@ -26,8 +26,16 @@ function includeHTML() {
   }
 };
 
-if (document.cookie) {
-    document.getElementById('addNoteMenu').style.display = "block";
+const userConnected = document.cookie.split("=")[1];
+
+if (userConnected) {
+    if (document.getElementById('LoginButton').style.display === "block") {
+        document.getElementById('LoginButton').style.display = "none";
+        document.getElementById('LogoutButton').style.display = "block";
+    } else {
+        document.getElementById('LoginButton').style.display = "block"
+        document.getElementById('LogoutButton').style.display = "none";
+    }
 }
 
 async function checkUserCompany(userId) {
@@ -43,3 +51,5 @@ async function checkUserCompany(userId) {
               console.log(data)
               }).catch(err => console.error(err))
 }
+
+

@@ -22,6 +22,7 @@ const btnGithubLinkSubmit = document.querySelector("#register-github")
 const btnJiraTicketSubmit = document.querySelector("#register-jiraTicket")
 const btnDateSubmit = document.querySelector("#register-dateNote")
 const btnNoteSubmit = document.querySelector("#register-note")
+//const btnTitleNoteSubmit = document.querySelector("#notes__title")
 
 let updateBtnGithubLinkSubmit = document.getElementById("update-register-github")
 let updateBtnJiraTicketSubmit = document.getElementById("update-register-jiraTicket")
@@ -61,24 +62,10 @@ const handleSubmit = async (e) =>{
         }
 
         let professionalInfoId = btnCompanyNameSubmit.value
+//        let noteTitle = btnTitleNoteSubmit.value
 
         await addNote(bodyObj, professionalInfoId);
-//        document.getElementById("register-note").value = '',
-//        companyNameList.innerHTML = ''
-//        companyTitleList.innerHTML = ''
-//                        .then (res => {
-//                            res.data.forEach(elem => {
-//                                let companyCard = document.createElement("div")
-//                                 companyCard.classList.add("class-m")
-//                                 companyCard.innerHTML = `
-//                                <option value=${elem.register-companyName}</option>
-//                                <option value=${elem.register-companyTitle}</option>
-//                                `
-//                            })
-//                        }).catch(err => console.log(err))
-//
-//                        companyNameList.append (companyCard);
-//                        companyTitleList.append (companyCard);
+
 }
 
 async function addNote(obj, professionalInfoId) {
@@ -90,7 +77,10 @@ async function addNote(obj, professionalInfoId) {
         .catch(err => console.error(err.message))
     if (response.status == 200) {
         return getAnnualNoteByUser(userId);
-    }
+//            sort((a,b) => {
+////            return new Date(a.updated) > new Date(b.updated) ? -1 : 1;});
+//    }
+}
 }
 
 async function getAnnualNoteByUser(userId) {
@@ -100,7 +90,7 @@ async function getAnnualNoteByUser(userId) {
       })
           .then(response => response.json())
           .then(data => createNoteCards(data))
-          .catch(err => console.error(err))
+//          .catch(err => console.error(err))
 }
 
 async function handleDelete(annualreviewnotesId) {
@@ -148,7 +138,7 @@ async function handleDelete(annualreviewnotesId) {
      })
          .then(res => res.json())
          .then(data => populateModal(data))
-//         .catch(err => console.error(err.message))
+         .catch(err => console.error(err.message))
  }
 
  const createNoteCards = (annualNotesList) => {
@@ -247,8 +237,43 @@ const getCompanyInfo = async () => {
     })
 }
 
+if (userId) {
+    if (document.getElementById('LoginFirstMessage').style.display === "block") {
+            document.getElementById('LoginFirstMessage').style.display = "none";
+            document.getElementById('MyNoteComponent').style.display = "block";
+    } else {
+        document.getElementById('LoginFirstMessage').style.display = "block"
+        document.getElementById('MyNoteComponent').style.display = "none";
+    }
+}
+
+//Sort notes
+//const filterNotes = ({
+//    setSelectedVal;
+//    dateNote;
+//})
+//
+//  const handleSelectSort = (e) => {
+//    const target = e.target.value;
+//    setSelectedVal(target);
+//
+//if (target === 'desc') {
+//      const SortedNotes = dateNote.sort((a, b) =>
+//        a.LastEdit < b.LastEdit ? 1 : -1
+//      );
+//      setNotes(SortedNotes);
+//
+//      // Sort by oldest notes
+//    } else if (target === 'asc') {
+//      const SortedNotes = dateNote.sort((a, b) =>
+//        b.LastEdit < a.LastEdit ? 1 : -1
+//      );
+//      setNotes(SortedNotes);
+
+
+
+
 submitForm.addEventListener("submit", handleSubmitCompany)
 submitFormAddNote.addEventListener("submit", handleSubmit)
 getAnnualNoteByUser(userId);
 getCompanyInfo()
-

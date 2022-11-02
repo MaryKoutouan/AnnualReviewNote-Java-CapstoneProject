@@ -8,6 +8,7 @@
     <link href="./CSS/bootstrap.min.css" rel="stylesheet">
     <link href="./CSS/sticky-menu.css" rel="stylesheet">
     <link href="./CSS/styles.css" rel="stylesheet">
+
     <title>Document</title>
 </head>
 <body  data-spy="scroll" data-target=".navbar-fixed-top">
@@ -23,15 +24,16 @@
             <a href="./home.html"> <img src="./images/logo_note.png" width="150"> </a>
         </div>
 
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <div class="menu-navbar">
             <ul class="nav navbar-nav">
-                <li class="crumb"><a href="./home.html">Home</a></li>
-                <li class="crumb"><a href="./register.html">Register</a></li>
-                <li class="crumb"><a href="./login.html">Login</a></li>
-                <li class="crumb" id="addNoteMenu"><a href="./addNote.html">My Notes</a></li>
-                <li class="crumb"><a href="./about.html">About</a></li>
+                <li class="crumb"><a href="./home.html" class="swipe-fill swipe-fill--up">Home</a></li>
+                <li class="crumb"><a href="./about.html" class="swipe-fill swipe-fill--up">About</a></li>
+                <li class="crumb"><a href="./register.html" class="swipe-fill swipe-fill--up">Register</a></li>
+                <li class="crumb" ><a href="./addNote.html" class="swipe-fill swipe-fill--up">My Notes</a></li>
+<!--                <li class="crumb"><a class="btn navbar-btn" href="./login.html" id="LoginButton" style="display : block">Login</a></li>-->
+<!--                <li class="crumb"><a class="btn btn-danger navbar-btn" href="./login.html" onclick="handleLogout()" id="LogoutButton" style="display : none">Logout</a></li>-->
             </ul>
-            <a class="btn btn-danger navbar-btn" href="./login.html" onclick="handleLogout()">Logout</a>
+
         </div>	<!-- .navbar-collapse -->
     </div>		<!-- .container -->
 </nav>

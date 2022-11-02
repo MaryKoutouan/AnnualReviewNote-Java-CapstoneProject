@@ -14,8 +14,6 @@ form {
     text-align: left
 }
 
-.container {
-}
 .boot-card {
     border: 1px solid gray;
   border-radius: 5px;
@@ -61,3 +59,11 @@ h2, h3 {
 .reviewbox {
     padding-left: 25px;
 }
+
+#LoginButton {
+    display: block;
+}
+#LogoutButton {
+    display: none;
+}
+

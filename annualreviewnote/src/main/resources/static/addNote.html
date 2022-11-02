@@ -13,9 +13,19 @@
 </head>
 <body>
 <div w3-include-html="./menu.html"></div>
-<div class="container-md">
-    <h1>My Notes</h1>
+<div class="menu-navbar">
+    <ul class="nav navbar-nav">
+        <li class="crumb"><a class="btn navbar-btn" href="./login.html" id="LoginButton" style="display : block">Login</a></li>
+        <li class="crumb"><a class="btn btn-danger navbar-btn" href="./login.html" onclick="handleLogout()" id="LogoutButton" style="display : none">Logout</a></li>
+    </ul>
+</div>
+</div>
 
+<div class="container-md">
+<h2 id="LoginFirstMessage" style="display : block">Please Login first</h2>
+</div>
+
+<div class="container-md" id="MyNoteComponent" style="display : none">
 <div class="container content">
     <div class="content">
         <button class="button createNote" id="createNote" onclick="showAddNoteForm()">
@@ -38,19 +48,21 @@
 </div>
 
 <div class="container-form" id="form-createCompany" style="display:none;">
+    <h1>Add Company</h1>
     <form id="form-addCompany">
     <div class="form-group">
         <label for="register-companyName">Company name</label>
-        <input type="text" class="form-control" id="register-companyName" placeholder="Enter the Company Name">
+        <input type="text" class="form-control" id="register-companyName" placeholder="Enter the Company Name" required>
     </div>
     <div class="form-group">
         <label for="register-PositionTitle">Title</label>
-        <input type="text" class="form-control" id="register-PositionTitle" placeholder="Enter your Title in the company">
+        <input type="text" class="form-control" id="register-PositionTitle" placeholder="Enter your Title in the company" required>
     </div>
         <button id="register-button" type="submit" class="btn btn-primary mt-1">Submit</button>
     </form>
 </div>
 <div class="container-form" id="form-createnote" style="display:none;">
+    <h1>Add a Note</h1>
     <form id="form-addNote">
         <label for="companyName">Company name</label>
         <select name="companyName" id="companyName">
@@ -60,7 +72,7 @@
         </select>
         <div class="form-group">
             <label for="register-github">GitHub Link</label>
-            <input type="url" class="form-control" id="register-github" placeholder="Enter your GitHub Link">
+            <input type="url" class="form-control" id="register-github" placeholder="Enter your GitHub Link" required>
         </div>
         <div class="form-group">
             <label for="register-jiraTicket">Jira Ticket</label>
@@ -68,11 +80,11 @@
         </div>
         <div class="form-group">
             <label for="register-dateNote">Date</label>
-            <input type="date" class="form-control" id="register-dateNote" placeholder="Enter Date">
+            <input type="date" class="form-control" id="register-dateNote" placeholder="Enter Date" required>
         </div>
         <div class="form-group">
             <label for="register-note">Note</label>
-            <textarea name="message" class="form-control" id="register-note" rows="15" cols="70" placeholder="Enter your Note..."></textarea>
+            <textarea name="message" class="form-control" id="register-note" rows="15" cols="70" placeholder="Enter your Note..." required></textarea>
         </div>
         <button id="submit-button" type="submit" class="btn btn-primary mt-1">Submit</button>
     </form>
@@ -99,20 +111,9 @@
 
     </div>
 </div>
-
-<div class="select">
-    <button class="button select" id="button id" type="button" placeholder="Sort Options"> Sort Notes
-        <select >
-            <option disabled value="desc">Newest </option>
-            <option disabled value="asc">Oldest </option>
-        </select>
-        ::
-    </button>
+<h1>My Notes</h1>
+<div id="annualNoteContainer"></div>
 </div>
-<div id="annualNoteContainer"> </div>
-</div>
-
-
 </body>
 
 <script src="./javascript/addNote.js" type="application/javascript"></script>
