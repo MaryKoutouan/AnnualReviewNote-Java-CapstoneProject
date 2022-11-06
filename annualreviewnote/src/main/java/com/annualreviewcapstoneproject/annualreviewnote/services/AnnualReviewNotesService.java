@@ -1,6 +1,7 @@
 package com.annualreviewcapstoneproject.annualreviewnote.services;
 
 import com.annualreviewcapstoneproject.annualreviewnote.dtos.AnnualReviewNotesDto;
+import com.annualreviewcapstoneproject.annualreviewnote.entities.AnnualReviewNotes;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -19,4 +20,5 @@ public interface AnnualReviewNotesService {
     List<AnnualReviewNotesDto> getAllAnnualReviewNotes(Long usersId);
 
     Optional<AnnualReviewNotesDto> getAnnualReviewNotesById(Long annualReviewNotesId);
+
 }

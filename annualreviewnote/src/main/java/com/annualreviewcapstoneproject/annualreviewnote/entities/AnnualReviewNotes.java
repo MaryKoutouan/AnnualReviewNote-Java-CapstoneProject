@@ -1,6 +1,7 @@
 package com.annualreviewcapstoneproject.annualreviewnote.entities;
 
 import com.annualreviewcapstoneproject.annualreviewnote.dtos.AnnualReviewNotesDto;
+import com.annualreviewcapstoneproject.annualreviewnote.dtos.ProfessionalInformationDto;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;

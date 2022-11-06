@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -74,7 +75,7 @@ public class AnnualReviewNotesServiceImpl implements AnnualReviewNotesService {
 
     @Override
     public List<AnnualReviewNotesDto> getAllAnnualReviewNotes(Long usersId) {
-        //allows the user by seeing all their annual review notes by ID
+        //allows the user to see all their annual review notes by ID
         Optional<Users> usersOptional = usersRepository.findById(usersId);
 
         if (usersOptional.isPresent()) {
@@ -91,5 +92,6 @@ public class AnnualReviewNotesServiceImpl implements AnnualReviewNotesService {
         }
         return Optional.empty();
     }
+
 
 }

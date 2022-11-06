@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="./CSS/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./CSS/index.css" />
+  <link rel="stylesheet" href="./richtexteditor/res/style.css" />
+  <link rel="stylesheet" href="./richtexteditor/rte_theme_default.css" />
+  <title>Generate Annual Review Notes</title>
+
+</head>
+<body>
+<div w3-include-html="./menu.html"></div>
+
+<div class="container-md" id="MyNoteComponent">
+  <div class="container content">
+    <h1>Format your Annual Review now!</h1>
+    <div style="margin:auto;padding:12px 6px 36px;max-width:960px;">
+      <div class="hs-docs-content-divider">
+        <!--Include the JS & CSS-->
+        <div id="div_editor1"></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<script src="./richtexteditor/res/patch.js"></script>
+<script type="text/javascript" src="./richtexteditor/rte.js"></script>
+<script type="text/javascript" src='./richtexteditor/plugins/all_plugins.js'></script>
+<script src="./javascript/generatereview.js"></script>
+<script src="./javascript/menu.js"></script>
+<script>
+includeHTML();
+</script>
+</html>

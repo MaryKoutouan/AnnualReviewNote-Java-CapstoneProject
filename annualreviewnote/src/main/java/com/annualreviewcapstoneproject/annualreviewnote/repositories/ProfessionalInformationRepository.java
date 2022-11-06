@@ -12,4 +12,5 @@ import java.util.Optional;
 @Repository
 public interface ProfessionalInformationRepository extends JpaRepository<ProfessionalInformation, Long> {
     List<ProfessionalInformation> findAllByUserEquals(Users users);
+
 }

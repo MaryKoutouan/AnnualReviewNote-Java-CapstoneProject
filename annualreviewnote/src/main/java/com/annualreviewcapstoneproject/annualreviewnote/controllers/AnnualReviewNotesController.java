@@ -1,6 +1,7 @@
 package com.annualreviewcapstoneproject.annualreviewnote.controllers;
 
 import com.annualreviewcapstoneproject.annualreviewnote.dtos.AnnualReviewNotesDto;
+import com.annualreviewcapstoneproject.annualreviewnote.entities.AnnualReviewNotes;
 import com.annualreviewcapstoneproject.annualreviewnote.services.AnnualReviewNotesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

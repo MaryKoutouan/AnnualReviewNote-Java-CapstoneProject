@@ -1,11 +1,3 @@
-function showAddNoteForm() {
-   document.getElementById('form-createnote').style.display = "block";
-   document.getElementById('form-createCompany').style.display = "none";
-}
-function showAddCompanyForm() {
-   document.getElementById('form-createCompany').style.display = "block";
-   document.getElementById('form-createnote').style.display = "none";
-}
 const cookieArr = document.cookie.split("=")
 const userId = cookieArr[1];
 
@@ -16,13 +8,19 @@ const submitForm = document.getElementById("form-addCompany")
 const submitFormAddNote = document.getElementById("form-addNote")
 const annualNoteContainer = document.querySelector("#annualNoteContainer")
 
-const btnCompanyNameSubmit = document.querySelector("#companyName")
-const btnPositionTitleSubmit = document.querySelector("#PositionTitle")
+
+const SelectCompanyNameSubmit = document.querySelector("#companyName")
+const PositionTitle = document.querySelector("#PositionTitle")
 const btnGithubLinkSubmit = document.querySelector("#register-github")
 const btnJiraTicketSubmit = document.querySelector("#register-jiraTicket")
 const btnDateSubmit = document.querySelector("#register-dateNote")
 const btnNoteSubmit = document.querySelector("#register-note")
-//const btnTitleNoteSubmit = document.querySelector("#notes__title")
+
+
+const btnCompanyNameGenerate = document.querySelector('#generate-reviewCompanyName')
+const btnPositionTitleGenerate = document.querySelector('#generate-reviewPositionTitle')
+const generateForm = document.querySelector("#form-generateCompany")
+
 
 let updateBtnGithubLinkSubmit = document.getElementById("update-register-github")
 let updateBtnJiraTicketSubmit = document.getElementById("update-register-jiraTicket")
@@ -36,6 +34,40 @@ const headers = {
 
 const baseUrl = "http://localhost:8080/api/annualreviewnotes"
 const baseUrlCompany = "http://localhost:8080/api/professionalinformation/users"
+
+function showAddNoteForm() {
+    if (document.getElementById('form-createnote').style.display === "block") {
+       document.getElementById('form-createnote').style.display = "none";
+       document.getElementById('form-createCompany').style.display = "none";
+       document.getElementById('form-generateReview').style.display = "none";
+       document.getElementById('myNoteDiv').style.display = "block";
+    } else {
+       document.getElementById('form-createnote').style.display = "block";
+       document.getElementById('form-createCompany').style.display = "none";
+       document.getElementById('form-generateReview').style.display = "none";
+       document.getElementById('myNoteDiv').style.display = "block";
+       }
+}
+function showAddCompanyForm() {
+    if (document.getElementById('form-createCompany').style.display === "block") {
+       document.getElementById('form-createCompany').style.display = "none";
+       document.getElementById('form-createnote').style.display = "none";
+       document.getElementById('form-generateReview').style.display = "none";
+       document.getElementById('myNoteDiv').style.display = "block";
+    } else {
+       document.getElementById('form-createCompany').style.display = "block";
+       document.getElementById('form-createnote').style.display = "none";
+       document.getElementById('form-generateReview').style.display = "none";
+       document.getElementById('myNoteDiv').style.display = "block";
+       }
+}
+
+function showGenerateReviewForm() {
+       document.getElementById('form-generateReview').style.display = "block";
+       document.getElementById('form-createnote').style.display = "none";
+       document.getElementById('form-createCompany').style.display = "none";
+       document.getElementById('myNoteDiv').style.display = "none";
+}
 
 const handleSubmitCompany = async (e) =>{
     e.preventDefault()
@@ -60,13 +92,16 @@ const handleSubmit = async (e) =>{
             annualNote: btnNoteSubmit.value,
             dateNote: btnDateSubmit.value
         }
-
-        let professionalInfoId = btnCompanyNameSubmit.value
-//        let noteTitle = btnTitleNoteSubmit.value
-
+        let professionalInfoId = SelectCompanyNameSubmit.value
         await addNote(bodyObj, professionalInfoId);
 
 }
+
+
+const handleSubmitGenerateNote = async (e) => {
+    e.preventDefault()
+     window.location.replace('http://localhost:8080/generatereview.html')
+ }
 
 async function addNote(obj, professionalInfoId) {
     const response = await fetch(`${baseUrl}/users/${userId}/${professionalInfoId}`, {
@@ -76,11 +111,9 @@ async function addNote(obj, professionalInfoId) {
     })
         .catch(err => console.error(err.message))
     if (response.status == 200) {
+        window.location.replace('http://localhost:8080/addNote.html');
         return getAnnualNoteByUser(userId);
-//            sort((a,b) => {
-////            return new Date(a.updated) > new Date(b.updated) ? -1 : 1;});
-//    }
-}
+        }
 }
 
 async function getAnnualNoteByUser(userId) {
@@ -89,7 +122,9 @@ async function getAnnualNoteByUser(userId) {
           headers: headers
       })
           .then(response => response.json())
-          .then(data => createNoteCards(data))
+          .then(data => {
+                createNoteCards(data)
+          })
 //          .catch(err => console.error(err))
 }
 
@@ -143,41 +178,44 @@ async function handleDelete(annualreviewnotesId) {
 
  const createNoteCards = (annualNotesList) => {
     annualNoteContainer.innerHTML = ''
+    let i = 0
+    let j = 0
+    let listOfColor = ['blue', 'green', 'yellow', 'brown', 'purple', 'orange']
     annualNotesList.forEach(obj => {
         let noteCard = document.createElement("div")
-
+        if (j === 6) {j = 0}
         noteCard.classList.add("m-2")
-        noteCard.innerHTML = `
-            <div class="card d-flex" style="float:left; width:300px; height:300px;">
-                <div class="card-body d-flex flex-column  justify-content-between" style="height: available">
-                    <p class="card-text"><b>Jira Ticket:</b> ${obj.jiraTicket}</p>
-                    <p class="card-text"><a href=${obj.githubLink} target=_blank> <b>GitHub Link</b></a></p>
-                    <p class="card-text"><b>Date:</b> ${(obj.dateNote).split("T")[0]}</p>
-                    <p class="card-text"><b>Note:</b><br> ${(obj.annualNote).split(' ').slice(0, 45).join(' ')} <span id="dots">...</span><span id="more">${(obj.annualNote).split(' ').slice(46, -1).join(' ')}</span></p>
-                    <button onclick="ReadMoreFn()" id="BtnReadMore">Read more</button>
-                    <div class="d-flex justify-content-between">
+        let htmlNoteCard = `<div class="col-md-4 col-sm-6 content-card" >
+            <div class="card-big-shadow">
+               <div class="card card-just-text" data-background="color" data-color="" data-radius="none">
+                   <p class="card-text"><b>Jira Ticket:</b> ${obj.jiraTicket}</p>
+                   <p class="card-text"><a href=${obj.githubLink} target=_blank> <b>GitHub Link</b></a></p>
+                   <p class="card-text"><b>Date:</b> ${(obj.dateNote).split("T")[0]}</p>
+                   <p class="card-text"><b>Note:</b><br> ${(obj.annualNote).split(' ').slice(0, 40).join(' ')} <span id="dots">...</span><span id="more" style="display: none;">${(obj.annualNote).split(' ').slice(41, -1).join(' ')}</span></p>
 
-                        <button class="btn btn-danger" onclick="handleDelete(${obj.id})">
-                        Delete
-                        </button>
-
-
-                        <button onclick="getAnnualNoteById(${obj.id})" type="button" class="btn btn-primary"
-                        data-bs-toggle="modal" data-bs-target="#note-edit-modal">
-                        Edit
-                        </button>
-                        </div>
-                    </div>
-                </div>
-            `
+                   <div class="d-flex justify-content-between">
+                       <button class="btn" onclick="ReadMoreFn()" id="BtnReadMore">Read more</button>
+                       <button onclick="getAnnualNoteById(${obj.id})" type="button" class="btn btn-primary"
+                         data-bs-toggle="modal" data-bs-target="#note-edit-modal">Edit </button>
+                       <button class="btn btn-danger" onclick="handleDelete(${obj.id})">Delete</button>
+                   </div>
+               </div>
+            </div>
+            </div>
+               `
+        htmlNoteCard = htmlNoteCard.replace('onclick="ReadMoreFn()"', 'onclick="ReadMoreFn('+i+')"')
+        htmlNoteCard = htmlNoteCard.replace('data-color=""', 'data-color='+listOfColor[j])
+        noteCard.innerHTML = htmlNoteCard;
         annualNoteContainer.append(noteCard);
+        i += 1
+        j += 1
     })
  }
 
- function ReadMoreFn() {
-   let dots = document.getElementById("dots");
-   let moreText = document.getElementById("more");
-   let btnText = document.getElementById("BtnReadMore");
+ function ReadMoreFn(num) {
+   let dots = document.querySelectorAll("#dots")[num]
+   let moreText = document.querySelectorAll("#more")[num]
+   let btnText = document.querySelectorAll("#BtnReadMore")[num]
 
    if (dots.style.display === "none") {
      dots.style.display = "inline";
@@ -218,6 +256,9 @@ window.onclick = function(event) {
 const getCompanyInfo = async () => {
     companyName.innerHTML = ''
     PositionTitle.innerHTML = ''
+    document.getElementById('generate-reviewCompanyName').innerHTML = ''
+    document.getElementById('generate-reviewPositionTitle').innerHTML = ''
+
     await fetch(`${baseUrlCompany}/${userId}`, {
       method: "GET",
       headers: headers
@@ -225,14 +266,16 @@ const getCompanyInfo = async () => {
    .then(response => response.json())
    .then(data => {
        data.forEach(elem => {
-       let CompanyName = `
+       let CompanyNameValue = `
           <option value=${elem.id}>${elem.companyInfo}</option>
           `
        let Position = `
           <option value=${elem.id}>${elem.companyTitle}</option>
          `
        PositionTitle.innerHTML += Position
-       companyName.innerHTML += CompanyName
+       companyName.innerHTML += CompanyNameValue
+       document.getElementById('generate-reviewCompanyName').innerHTML += CompanyNameValue
+       document.getElementById('generate-reviewPositionTitle').innerHTML += Position
        })
     })
 }
@@ -247,33 +290,24 @@ if (userId) {
     }
 }
 
-//Sort notes
-//const filterNotes = ({
-//    setSelectedVal;
-//    dateNote;
-//})
-//
-//  const handleSelectSort = (e) => {
-//    const target = e.target.value;
-//    setSelectedVal(target);
-//
-//if (target === 'desc') {
-//      const SortedNotes = dateNote.sort((a, b) =>
-//        a.LastEdit < b.LastEdit ? 1 : -1
-//      );
-//      setNotes(SortedNotes);
-//
-//      // Sort by oldest notes
-//    } else if (target === 'asc') {
-//      const SortedNotes = dateNote.sort((a, b) =>
-//        b.LastEdit < a.LastEdit ? 1 : -1
-//      );
-//      setNotes(SortedNotes);
-
+async function checkUserCompany(userId) {
+ await fetch('http://localhost:8080/api/professionalinformation/users/' + userId,{
+                  method: "GET",
+                  headers: {'Content-Type':'application/json'}
+              }).then(response => response.json()).then(data => {
+              if (data.status === 400 || data.length === 0) {
+                document.getElementById('form-createCompany').style.display = "block";
+                document.getElementById('myNotesH1').style.display = "none";
+              }
+              }).catch(err => console.error(err))
+}
 
 
 
 submitForm.addEventListener("submit", handleSubmitCompany)
 submitFormAddNote.addEventListener("submit", handleSubmit)
+
+generateForm.addEventListener("submit", handleSubmitGenerateNote)
+
 getAnnualNoteByUser(userId);
 getCompanyInfo()

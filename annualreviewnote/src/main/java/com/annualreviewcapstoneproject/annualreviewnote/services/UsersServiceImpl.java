@@ -34,7 +34,7 @@ public class UsersServiceImpl implements UsersService {
         List<String> response = new ArrayList<>();
         Users users = new Users(usersDto);
         usersRepository.saveAndFlush(users);
-        response.add("http://localhost:8080/login.html");
+        response.add("http://localhost:8080/index.html");
         return response;
     }
 

@@ -27,7 +27,6 @@ form {
 }
 .row {
     width: 100%;
-    background: #EBFAFF; 
 }
 label {
     cursor: default;
@@ -46,9 +45,7 @@ aside {
     margin: 0;
     padding: 0;
 }
-button,input,select,textarea {
-    padding:8px;border:none;border:1px solid rgb(148, 140, 140);
-}
+
 h2, h3 {
     color: rgb(163, 67, 4);
 }
@@ -60,10 +57,13 @@ h2, h3 {
     padding-left: 25px;
 }
 
-#LoginButton {
-    display: block;
+.createNote {
+    float:left;
+    margin-inline: 2px;
+
 }
-#LogoutButton {
-    display: none;
+
+.navbar-nav{
+    margin: 15px !important;
 }
 
