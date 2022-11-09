@@ -19,20 +19,21 @@ Thanks for stopping here to check out my Annual Review Notes. Have a great time 
 
 To build a Spring Boot REST API with Java, you’re required to have:
 
-an Integrated Development Environment (IDE) or a text editor,
-JDK,
-Maven
+- an Integrated Development Environment (IDE) or a text editor,
+- JDK,
+- Maven
 
 ### Building a Spring Boot REST API in Java
 
-Step 1: Initializing a Spring Boot Project
-Step 2: Connecting Spring Boot to the Database
-Step 3: Creating a User Model(Entities classes)
-Step 4: Creating Repository Classes
-Step 5: Creating a Controller Classes
-Step 6: Creating a Service Classes
-Step 7: Compile, Build and Run
-Step 8: Testing the Spring Boot REST APIs
+- Initializing a Spring Boot Project
+- Connecting Spring Boot to the Database
+- Creating a User Model(Entities classes)
+- Creating Repository Classes
+- Creating a Controller Classes
+- Creating a Service Classes
+- Compile, Build and Run
+- Testing the Spring Boot REST APIs
 
 ### Run the application
-To run the app in your local machine
+Runs the app in the development mode.
+- Open http://localhost:8080 to view it in the browser.
