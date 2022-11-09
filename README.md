@@ -1,6 +1,6 @@
 # AnnualReviewNote-Java-CapstoneProject
 
-##Hello everyone !
+## Hello everyone !
 
 Every end of year a lot of employees struggle to write their annual review. A personal annual review is an opportunity to step back and take stock of your successes, failures, and learnings from the past 12 months.
 
@@ -15,5 +15,24 @@ The learning I experienced during this project has been phenomenal for my growth
 Thanks for stopping here to check out my Annual Review Notes. Have a great time here!
 
 ## Application Overview
+### Prerequisites
 
- To run the application
+To build a Spring Boot REST API with Java, you’re required to have:
+
+an Integrated Development Environment (IDE) or a text editor,
+JDK,
+Maven
+
+### Building a Spring Boot REST API in Java
+
+Step 1: Initializing a Spring Boot Project
+Step 2: Connecting Spring Boot to the Database
+Step 3: Creating a User Model(Entities classes)
+Step 4: Creating Repository Classes
+Step 5: Creating a Controller Classes
+Step 6: Creating a Service Classes
+Step 7: Compile, Build and Run
+Step 8: Testing the Spring Boot REST APIs
+
+### Run the application
+To run the app in your local machine
