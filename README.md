@@ -35,5 +35,5 @@ To build a Spring Boot REST API with Java, you’re required to have:
 - Testing the Spring Boot REST APIs
 
 ### Run the application
-> Runs the app in the development mode.
- Open http://localhost:8080 to view it in the browser.
+- Runs the app in the development mode.
+- Open http://localhost:8080/about.html to view it in the browser.
